@@ -1,0 +1,43 @@
+{
+  "name": "stud-v1",
+  "version": "1.0.0",
+  "description": "Stud — modern desktop movie tracking app",
+  "main": "dist-electron/main.js",
+  "private": true,
+  "scripts": {
+    "dev": "concurrently \"vite\" \"npm:dev:electron\"",
+    "dev:electron": "wait-on http://localhost:5173 && tsc -p electron/tsconfig.json && cross-env STUD_DEV_SERVER_URL=http://localhost:5173 electron .",
+    "build": "vite build && tsc -p electron/tsconfig.json",
+    "start": "npm run build && electron .",
+    "pack": "npm run build && electron-builder --dir",
+    "dist": "npm run build && electron-builder"
+  },
+  "dependencies": {
+    "@vitejs/plugin-react": "latest",
+    "vite": "latest",
+    "typescript": "latest",
+    "react": "latest",
+    "react-dom": "latest",
+    "electron": "^30.5.1",
+    "electron-store": "^8.2.0",
+    "active-win": "^8.2.1",
+    "lucide-react": "latest",
+    "recharts": "^2.12.7"
+  },
+  "devDependencies": {
+    "@types/node": "latest",
+    "@types/react": "latest",
+    "@types/react-dom": "latest",
+    "concurrently": "latest",
+    "wait-on": "latest",
+    "cross-env": "latest",
+    "electron-builder": "^24.13.3"
+  },
+  "build": {
+    "appId": "com.stud.desktop",
+    "productName": "Stud",
+    "files": ["dist/**/*", "dist-electron/**/*", "assets/**/*"],
+    "win": { "target": "nsis" },
+    "mac": { "target": "dmg", "category": "public.app-category.entertainment" }
+  }
+}

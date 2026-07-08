@@ -1,0 +1,9 @@
+node_modules/
+dist/
+dist-electron/
+*.log
+.DS_Store
+
+# Never commit local credentials or user data
+.env
+.env.*
